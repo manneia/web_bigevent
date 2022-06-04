@@ -12,6 +12,7 @@ $(function () {
     $(".login-box").show();
   });
   /**
+   * 实现用户注册功能
    * 利用Layui制作表单验证
    * layui的自定义验证规则
    */
@@ -23,14 +24,12 @@ $(function () {
     //自定义了一个叫做pwd的校验规则
     pwd: [/^[\s]{6,12}$/, "密码必须6到12位,且不能出现空格"],
     //校验两次密码是否一致
-    repwd: function (value) {
+    repwd: (value) => {
       //通过形参拿到的是确认密码的值,还需要拿到密码的值,在进行一次等于的判断,如果判断失败则return一个提示信息即可
       const pwd = $(".register-box [name=password]").val();
       //   console.log(value);
       //   console.log(pwd);
-      if (pwd !== value) {
-        return "两次密码不一致";
-      }
+      if (pwd !== value) return "两次密码不一致";
     },
   });
   //监听注册表单的提交事件
@@ -43,7 +42,7 @@ $(function () {
       password: $("#form_register [name=password]").val(),
     };
     $.post("/api/reguser", data, (res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status !== 0) {
         return layer.msg(res.message);
       }
@@ -65,11 +64,19 @@ $(function () {
         if (res.status !== 0) {
           layer.msg("登录失败");
         }
-        layer.msg("登录成功");
-        //将登录成功得到的token字符串,存储到LocalStorage中
-        localStorage.setItem("token", res.token);
-        console.log(res.token);
-        location.href = "/index.html";
+        // layer.msg("登录成功");
+        layer.msg(
+          "登录成功",
+          {
+            time: 1000, //2秒关闭（如果不配置，默认是3秒）
+          },
+          () => {
+            //将登录成功得到的token字符串,存储到LocalStorage中
+            localStorage.setItem("token", res.token);
+            // console.log(res.token);
+            location.href = "/index.html";
+          }
+        );
       },
     });
   });
