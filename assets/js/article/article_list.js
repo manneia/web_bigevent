@@ -28,7 +28,7 @@ $(function () {
         if (res.status !== 0) return layer.msg("获取文章列表失败");
         //使用模板引擎渲染表格
         const htmlStr = template("tpl-table", res);
-        // console.log(htmlStr);
+        // console.log(res.data);
         $("tbody").html(htmlStr);
         //调用渲染分页的方法
         renderPage(res.total);
@@ -78,7 +78,7 @@ $(function () {
    * 3.获取筛选表单中的数据,并将数据设置到查询参数对象中
    * 4.根据最新的筛选条件重新渲染表格的最新数据
    */
-  $("#form-search").on("submit", (e) => { 
+  $("#form-search").on("submit", (e) => {
     //阻止默认表单提交行为
     e.preventDefault();
     //获取筛选表单中的数据,并为查询参数对象赋值
@@ -128,20 +128,20 @@ $(function () {
       },
     });
   }
-
   //通过代理的方式为每一个删除按钮绑定点击事件
-  $("#tbody").on("click", ".btn-delete", function () {
+  $("tbody").on("click", ".btn-delete", function () {
+    // console.log(111);
     //获取当前页面上有多少条数据
     let total = $(".btn-delete").length;
+    //获取当前点击的删除按钮所在行的文章id
+    const id = $(this).attr("data-id");
     //弹出确认框,确认后才执行删除操作
     layer.confirm("确定删除吗?", { icon: 3, title: "提示" }, function (index) {
-      //获取当前点击的删除按钮所在行的文章id
-      const id = $(this).attr("data-id");
       //发起ajax请求,删除文章
       $.ajax({
         method: "GET",
         url: "/my/article/delete/" + id,
-        success: function (res) {
+        success: (res) => {
           if (res.status !== 0) return layer.msg("删除文章失败");
           layer.msg("删除文章成功");
           //当数据删除完成后,需要判断当前页码是否还有数据,若无数据将页码减一重新赋值给查询参数对象,若有数据,则不需要改变页码
@@ -149,8 +149,8 @@ $(function () {
             //如果total的值为1,证明删除之后,页面上就没有数据了
             //页码值最小为1
             q.pagenum = q.pagenum === 1 ? 1 : q.pagenum - 1;
-            initTable();
           }
+          initTable();
         },
       });
       layer.close(index);

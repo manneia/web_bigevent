@@ -66,8 +66,8 @@
         <td>{{$value.pub_date|dateFormat}}</td>
         <td>{{$value.state}}</td>
         <td>
-          <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-          <a class="layui-btn layui-btn-danger layui-btn-xs btn-delete" lay-event="del" data-id="{{$value.id}}">删除</a></a
+          <a class="layui-btn layui-btn-xs btn-edit" lay-event="edit" id="btn-edit" data-id="{{$value.Id}}">编辑</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs btn-delete" lay-event="del" data-id="{{$value.Id}}">删除</a></a
           >
         </td>
       </tr>
