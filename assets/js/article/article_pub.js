@@ -3,11 +3,15 @@ $(function () {
   var layer = layui.layer;
   var form = layui.form;
   initCate();
-  /**
-   * 渲染富文本编辑器
-   */
   // 初始化富文本编辑器
   initEditor();
+  /**
+   * 定义渲染文章分类的方法
+   * 1.封装函数,调用方法
+   * 2.在函数中发起ajax请求,获取数据
+   * 3.判断请求是否成功
+   * 4.调用模板引擎渲染下拉框
+   */
   //定义加载文章分类的函数
   function initCate() {
     $.ajax({
