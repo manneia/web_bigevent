@@ -3,8 +3,10 @@ $(function () {
    * 昵称长度限制
    * 初始化用户信息
    */
+  //导出form与layer对象
   let form = layui.form;
   let layer = layui.layer;
+  initUserInfo();
   form.verify({
     nickname: function (value) {
       // console.log(123);
@@ -36,7 +38,6 @@ $(function () {
   $(".layui-form").on("submit", function (e) {
     //阻止表单的默认提交行为
     e.preventDefault();
-    initUserInfo();
     // console.log($("#updateUserInfo").serialize());
     //发起ajax请求,更新数据
     $.ajax({
@@ -51,6 +52,7 @@ $(function () {
         // console.log(window.parent)
         // console.log(window.parent.getUserInfo)
         window.parent.getUserInfo();
+        // $("#btnReset").click();
       },
     });
   });

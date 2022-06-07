@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 导入layui样式表 -->
+    <link rel="stylesheet" href="/assets//lib//layui/css/layui.css" />
+    <!-- 导入自己的样式表 -->
+    <link rel="stylesheet" href="/assets/css/base.css" />
+  </head>
+  <body>
+    <!-- 卡片区域 -->
+    <div class="layui-card">
+      <div class="layui-card-header">文章列表</div>
+      <div class="layui-card-body">
+        <!-- 筛选区域 -->
+        <form class="layui-form" id="form-search">
+          <div class="layui-form-item layui-inline">
+            <select name="cate_id"></select>
+          </div>
+          <div class="layui-form-item layui-inline">
+            <select name="state">
+              <option value="">所有状态</option>
+              <option value="已发布">已发布</option>
+              <option value="草稿">草稿</option>
+            </select>
+          </div>
+          <div class="layui-form-item layui-inline">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">
+              筛选
+            </button>
+          </div>
+        </form>
+        <!-- 列表区域 -->
+        <table class="layui-table">
+          <colgroup>
+            <col />
+            <col width="190" />
+            <col width="210" />
+            <col width="190" />
+            <col width="190" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>文章标题</th>
+              <th>分类</th>
+              <th>发表时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <!-- 分页区域 -->
+        <div id="pagebox"></div>
+      </div>
+    </div>
+    <!-- 列表区域的模板引擎 -->
+    <script type="text/html" id="tpl-table">
+      {{each data}}
+      <tr>
+        <td>{{$value.title}}</td>
+        <td>{{$value.cate_name}}</td>
+        <td>{{$value.pub_date|dateFormat}}</td>
+        <td>{{$value.state}}</td>
+        <td>
+          <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+          <a class="layui-btn layui-btn-danger layui-btn-xs btn-delete" lay-event="del" data-id="{{$value.id}}">删除</a></a
+          >
+        </td>
+      </tr>
+      {{/each}}
+    </script>
+    <!-- 文章分类的模板引擎 -->
+    <script type="text/html" id="tpl-cate">
+      <option value="">请选择</option>
+      {{each data}}
+      <option value="{{$value.Id}}">{{$value.name}}</option>
+      {{/each}}
+    </script>
+    <!-- 导入layui的js文件 -->
+    <script src="/assets//lib/layui/layui.all.js"></script>
+    <!-- 导入JQuery的js -->
+    <script src="/assets/lib/jquery.js"></script>
+    <!-- 导入baseApi.js -->
+    <script src="/assets/js/baseApi.js"></script>
+    <!-- 导入模板引擎 -->
+    <script src="/assets/lib/template-web.js"></script>
+    <!-- 导入自己的js -->
+    <script src="/assets/js/article/article_list.js"></script>
+  </body>
+</html>
