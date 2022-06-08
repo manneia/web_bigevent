@@ -39,7 +39,8 @@ $(function () {
         // console.log(res.data);
         $("tbody").html(htmlStr);
         //调用渲染分页的方法
-        renderPage(res.total);
+        $("#pagebox").html("");
+        if (res.data.length !== 0) return renderPage(res.total);
       },
     });
     //定义美化时间的过滤器
