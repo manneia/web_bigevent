@@ -1,7 +1,8 @@
 $(function () {
   //初始化渲染页面,将文章数据渲染到页面
   let data = window.location.search;
-  let Id = data.slice(1);
+  let Id = data.slice(4);
+  console.log(Id);
   initArticle(Id);
   function initArticle(ID) {
     //发起ajax请求,获取当前文章的详细信息

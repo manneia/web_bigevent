@@ -185,7 +185,8 @@ $(function () {
     // $("#iframe-edit").css("display", "block");
     //获取到当前点击文章的id
     const Id = $(this).attr("data-id");
-    window.open(`/article/article_edit.html?${Id}`);
+    // window.open(`/article/article_edit.html?${Id}`);
+    location.href = `/article/article_edit.html?id=${Id}`;
     //调用initArticle方法,初始化编辑文章的表单
     // initArticle(Id);
   });
