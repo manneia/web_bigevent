@@ -63,7 +63,7 @@ $(function () {
     }
   }
   //调用初始化文章分类的下拉框方法
-  initCate();
+  // initCate();
   //初始化文章分类下拉框的方法
   function initCate() {
     $.ajax({

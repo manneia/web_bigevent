@@ -41,10 +41,9 @@ $(function () {
         if (res.status !== 0) return layer.msg("获取分类失败");
         //调用模板引擎,渲染分类的下拉菜单
         let htmlStr = template("tpl-edit", res);
-        // console.log(htmlStr);
         // console.log($("#edit_id"));
         $("[name=cate_id]").html(htmlStr);
-        //调用form.render()渲染下拉菜单
+        // 调用form.render()渲染下拉菜单
         form.render();
       },
     });
@@ -149,7 +148,7 @@ $(function () {
         layer.msg(res.message);
         //跳转到文章列表页面
         location.href = "/article/article_list.html";
-        initTable();
+        // initTable();
       },
     });
   }
