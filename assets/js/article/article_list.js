@@ -1,4 +1,5 @@
 $(function () {
+  //初始化文章列表
   //导出layer和form对象
   let layer = layui.layer;
   let form = layui.form;
@@ -16,7 +17,14 @@ $(function () {
   };
   //调用获取文章列表的方法
   initTable();
-  //获取文章数据的方法
+  //获取文章列表数据的方法
+  /**
+   * 1.定义一个函数,调用函数
+   * 2.在函数中发起ajax请求,获取数据
+   * 3.判断请求是否成功
+   * 4.使用模板引擎渲染数据
+   * 5.使用laypage插件分页
+   */
   function initTable() {
     // console.log(111);
     $.ajax({
@@ -92,8 +100,10 @@ $(function () {
   });
   //定义渲染分页的方法
   /**
-   *
    * @param {*} total
+   * @param {*} pagenum
+   * @param {*} pagesize
+   * @param {*} cate_id
    */
   function renderPage(total) {
     //调用laypage.render的分页方法
@@ -155,5 +165,28 @@ $(function () {
       });
       layer.close(index);
     });
+  });
+  // function initArticle(ID) {
+  //   //发起ajax请求,获取当前文章的详细信息
+  //   $.ajax({
+  //     method: "GET",
+  //     url: "/my/article/" + ID,
+  //     success: (res) => {
+  //       console.log(res);
+  //       if (res.status !== 0) return layer.msg("获取文章详情失败");
+  //       //调用模板引擎的render方法,渲染编辑文章的表单
+  //       //为编辑区域的表单快速赋值
+  //       form.val("form-edit", res.data);
+  //     },
+  //   });
+  // }
+  //通过代理的方式为每一个编辑按钮绑定点击事件
+  $("tbody").on("click", ".btn-edit", function () {
+    // $("#iframe-edit").css("display", "block");
+    //获取到当前点击文章的id
+    const Id = $(this).attr("data-id");
+    window.open(`/article/article_edit.html?${Id}`);
+    //调用initArticle方法,初始化编辑文章的表单
+    // initArticle(Id);
   });
 });

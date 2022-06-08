@@ -11,15 +11,17 @@
     <!-- 导入公共样式 -->
     <link rel="stylesheet" href="/assets/css/base.css" />
     <!-- 导入自己的样式表 -->
-    <link rel="stylesheet" href="/assets/css/article/article_pub.css" />
+    <link rel="stylesheet" href="/assets/css/article/article_edit.css" />
   </head>
   <body>
     <!-- 卡片区域 -->
     <div class="layui-card">
-      <div class="layui-card-header">写文章</div>
+      <div class="layui-card-header">修改文章</div>
       <div class="layui-card-body">
         <!-- 发布文章的表单 -->
-        <form class="layui-form" id="form-pub">
+        <form class="layui-form" id="form-edit" lay-filter="form-edit">
+          <!-- 隐藏域 -->
+          <input type="hidden" name="Id" />
           <!-- 第一行 -->
           <div class="layui-form-item">
             <label class="layui-form-label">文章标题</label>
@@ -51,7 +53,7 @@
             <!-- 左侧的 label -->
             <label class="layui-form-label">文章内容</label>
             <!-- 为富文本编辑器外部的容器设置高度 -->
-            <div class="layui-input-block" style="height: 400px">
+            <div class="layui-input-block" style="height: 25rem">
               <!-- 重要：将来这个 textarea 会被初始化为富文本编辑器 -->
               <textarea name="content"></textarea>
             </div>
@@ -98,18 +100,26 @@
                 class="layui-btn layui-btn-primary"
                 lay-submit
                 lay-filter="formDemo"
-                id="btnSave"
+                id="btnReset"
               >
-                存为草稿
+                重置
+              </button>
+              <button
+                class="layui-btn layui-btn-primary"
+                lay-submit
+                lay-filter="formDemo"
+                id="btnCancel"
+              >
+                取消
               </button>
             </div>
           </div>
         </form>
       </div>
     </div>
-    <!-- 文章类别的模板引擎 -->
-    <script type="text/html" id="tpl-pub">
-      <option value="">请选择文章列表</option>
+    <!-- 文章分类的模板引擎 -->
+    <script type="text/html" id="tpl-edit">
+      <option value="">请选择</option>
       {{each data}}
       <option value="{{$value.Id}}">{{$value.name}}</option>
       {{/each}}
@@ -129,6 +139,7 @@
     <script src="/assets/lib/tinymce/tinymce.min.js"></script>
     <script src="/assets/lib/tinymce/tinymce_setup.js"></script>
     <!-- 导入自己的js -->
-    <script src="/assets/js/article/article_pub.js"></script>
+    <script src="/assets/js/article/article_list.js"></script>
+    <script src="/assets/js/article/article_edit.js"></script>
   </body>
 </html>
