@@ -103,7 +103,6 @@ $(function () {
    * @param {*} total
    * @param {*} pagenum
    * @param {*} pagesize
-   * @param {*} cate_id
    */
   function renderPage(total) {
     //调用laypage.render的分页方法
